@@ -100,6 +100,7 @@ setup(
             'mpp-solar=mppsolar:main',
             'mpp-info-pub=mppsolar.mpp_info_pub:main',
             'mpp-solar-service=mppsolar.mpp_solar_service:main',
+            'mpp2emoncms=mppsolar.mpp2emoncms:main',
         ],
     },
 
