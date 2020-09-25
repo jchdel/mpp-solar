@@ -1,20 +1,15 @@
 #!/usr/bin/python3
 #
-#
-# mpp_info_pub.py
+# mpp2emoncms.py
 #
 # script to query MPP Solar PIP-4048MS inverter/charger
 # - inverter connected to computer via serial
-#      (USB to Serial converter used for testing)
-# - posts results to MQTT broker
+#      (USB used for testing)
+# - posts results to MQTT broker running emon hierarchy for integration with emonCMS
 # - uses mpputils.py / mppcommands.py to abstract PIP communications
 #
 import paho.mqtt.publish as publish
-
-
 from .mpputils import mppUtils
-grab_settings = False
-
 
 def main():
     from argparse import ArgumentParser
@@ -27,6 +22,7 @@ def main():
     parser.add_argument('-p', '--password', type=str, help='MQTT Broker password', default='emonpimqtt2016')
     args = parser.parse_args()
 
+    # emonCMS exposes a mosquitto requiring auth
     if not args.username:
         auth = None
     else:
