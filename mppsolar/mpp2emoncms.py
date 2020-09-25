@@ -1,11 +1,14 @@
 #!/usr/bin/python3
 #
 # mpp2emoncms.py
+# Written initally by Jean-Charles de Longueville <jean-charles@de-longueville.eu>
+# to feed his openenergymonitor.org system
 #
 # script to query MPP Solar PIP-4048MS inverter/charger
 # - inverter connected to computer via serial
 #      (USB used for testing)
-# - posts results to MQTT broker running emon hierarchy for integration with emonCMS
+# - posts results to MQTT broker running on emonCMS
+#      feeds will appear under serial_number of inverter as node ID
 # - uses mpputils.py / mppcommands.py to abstract PIP communications
 #
 import paho.mqtt.publish as publish
