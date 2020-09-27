@@ -38,9 +38,21 @@ def main():
 
         # Collect Inverter Status data and publish
         msgs = []
-        fullStatus = mp.getFullStatus()
-        for key in sorted(fullStatus):
+
+        data = mp.getFullStatus()
+
+        for key in data:
             topic = 'emon/{}/{}'.format(serial_number, key)
-            msg = {'topic': topic, 'payload': '{}'.format(fullStatus[key]['value'])}
+            msg = {'topic': topic, 'payload': '{}'.format(data[key]['value'])}
             msgs.append(msg)
+
+        data = mp.getResponseDict("QPGS0")
+
+        for key in data:
+            topic = 'emon/{}/{}'.format(serial_number, key)
+            msg = {'topic': topic, 'payload': '{}'.format(data[key][0])}
+            msgs.append(msg)
+
         publish.multiple(msgs, hostname=args.broker, auth=auth)
+
+
